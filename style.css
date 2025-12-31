@@ -782,3 +782,27 @@ img{ max-width:100%; height:auto; }
   /* אם יש לך טקסטים ארוכים/כפתורים שנדחפים */
   .topbar-inner{ padding: 10px 12px; }
 }
+/* ===== Fix settings modal for mobile ===== */
+@media (max-width: 600px) {
+
+  .modal-box {
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    border-radius: 16px;
+    max-height: 90vh;
+    overflow-y: auto;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .modal-actions {
+    flex-direction: column;
+  }
+
+  .modal-actions .btn {
+    width: 100%;
+  }
+}
