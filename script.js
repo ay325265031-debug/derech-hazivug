@@ -1285,6 +1285,65 @@ function bind() {
   btnExport.addEventListener("click", () => {
     const candidate = currentCandidate;
     if (!candidate) return;
+     // Share modal
+  const shareModal = $("share-modal");
+  const shareClose = $("btn-share-close");
+  const shareWa = $("btn-share-whatsapp");
+  const shareEmail = $("btn-share-email");
+  const shareCopy = $("btn-share-copy");
+
+  function openShareModal(){
+    if (shareModal) shareModal.style.display = "flex";
+  }
+  function closeShareModal(){
+    if (shareModal) shareModal.style.display = "none";
+  }
+
+  // כפתור "שיתוף פרופיל" (אם קיים אצלך בכרטיס)
+  const btnShare = $("btn-share");
+  if (btnShare) btnShare.onclick = openShareModal;
+
+  if (shareClose) shareClose.onclick = closeShareModal;
+
+  if (shareModal) {
+    shareModal.addEventListener("click", (e) => {
+      if (e.target && e.target.id === "share-modal") closeShareModal();
+    });
+  }
+
+  function buildShareUrl(){
+    // זמני: משתף את העמוד הראשי (אחרי שפרסמת בגיטהאב זה יהיה לינק אמיתי)
+    return window.location.href;
+  }
+
+  if (shareWa) {
+    shareWa.onclick = () => {
+      const url = buildShareUrl();
+      const text = encodeURIComponent("היי, זה הפרופיל ששלחתי לך:\n" + url);
+      window.open("https://wa.me/?text=" + text, "_blank");
+    };
+  }
+
+  if (shareEmail) {
+    shareEmail.onclick = () => {
+      const url = buildShareUrl();
+      const subject = encodeURIComponent("שיתוף פרופיל");
+      const body = encodeURIComponent("מצרפת קישור:\n" + url);
+      window.location.href = `mailto:?subject=${subject}&body=${body}`;
+    };
+  }
+
+  if (shareCopy) {
+    shareCopy.onclick = async () => {
+      const url = buildShareUrl();
+      try{
+        await navigator.clipboard.writeText(url);
+        alert("הקישור הועתק ✅");
+      }catch{
+        prompt("העתיקי את הקישור:", url);
+      }
+    };
+  }
 
     // יוצרים דף שיתוף חדש
     const shareHTML = `
