@@ -705,3 +705,16 @@ body.dark .lock-box{ background: #0f172a; }
     padding-bottom: 20px;
   }
 }
+/* ---------- Share modal ---------- */
+.share-box{ max-width: 520px; }
+.share-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+}
+.share-actions{
+  display:grid;
+  gap:10px;
+  margin-top:12px;
+}
