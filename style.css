@@ -806,3 +806,33 @@ img{ max-width:100%; height:auto; }
     width: 100%;
   }
 }
+/* ===== Mobile fix: Settings / Modals fit iPhone ===== */
+html, body{
+  width: 100%;
+  overflow-x: hidden;
+}
+
+@media (max-width: 520px){
+  .modal{
+    padding: 10px;
+    align-items: flex-start;
+  }
+
+  .modal-box{
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    border-radius: 18px;
+    max-height: 88vh;
+  }
+
+  /* make long rows wrap nicely */
+  label.row{
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  input, textarea, select{
+    width: 100%;
+  }
+}
