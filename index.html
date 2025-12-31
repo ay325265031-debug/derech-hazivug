@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>דרך הזיווג</title>
+  <link rel="stylesheet" href="./style.css" />
+</head>
+
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brand" id="t-brand">דרך הזיווג</div>
+      <div class="top-actions">
+        <button class="iconbtn" id="btn-settings" title="הגדרות">⚙️</button>
+        <button class="iconbtn" id="btn-add" title="הוספת מועמד">＋</button>
+      </div>
+    </div>
+  </header>
+
+  <div id="shabbat-banner" class="banner" style="display:none;"></div>
+
+  <main class="container">
+
+    <!-- LIST VIEW -->
+    <section id="view-list">
+      <div class="toolbar">
+        <div class="filters">
+          <button class="chip active" data-filter="all" id="t-filter-all">כולם</button>
+          <button class="chip" data-filter="important" id="t-filter-important">⭐ חשובים</button>
+          <button class="chip" data-filter="archived" id="t-filter-archived">ארכיון</button>
+          <button class="chip" data-filter="trash" id="t-filter-trash">🗑️ פח מחזור</button>
+        </div>
+
+        <input id="search" class="search" placeholder="חיפוש לפי שם…" />
+      </div>
+
+      <div id="list" class="list"></div>
+      <div id="empty" class="empty" style="display:none;">אין תוצאות</div>
+    </section>
+
+    <!-- CARD VIEW -->
+    <section id="view-card" style="display:none;">
+      <div class="card">
+
+        <div class="card-cover"></div>
+
+        <div class="card-head">
+          <button class="back-arrow" id="btn-back-top">⬅</button>
+          <div>
+            <h2 id="card-name" class="card-title"></h2>
+
+            <div class="card-sub">
+              <span id="card-age"></span> ·
+              <span id="card-area"></span> ·
+              <span id="card-level"></span>
+
+              <span id="card-archived-badge" class="badge" style="display:none;">ארכיון</span>
+              <span id="card-trash-badge" class="badge dangerBadge" style="display:none;">בפח מחזור</span>
+            </div>
+
+            <div class="card-mini">
+              <span id="card-ethnicity"></span>
+              <span id="card-phone"></span>
+            </div>
+          </div>
+
+          <button class="btn ghost" id="btn-star">☆ סימון חשוב</button>
+        </div>
+
+        <div class="hint" id="soft-note"></div>
+
+        <div class="sections">
+
+          <div class="sec">
+            <div class="sec-title" id="t-sec-doing">מה עושה כרגע</div>
+            <div id="card-doing" class="sec-body"></div>
+          </div>
+
+          <div class="sec">
+            <div class="sec-title" id="t-sec-personality">אופי ותכונות</div>
+            <div id="card-personality" class="sec-body"></div>
+          </div>
+
+          <div class="sec">
+            <div class="sec-title" id="t-sec-family">משפחה</div>
+            <div id="card-family" class="sec-body"></div>
+          </div>
+
+          <div class="sec">
+            <div class="sec-title" id="t-sec-looking">מי מחפש/ת</div>
+            <div id="card-looking" class="sec-body"></div>
+          </div>
+
+          <div class="sec">
+            <div class="sec-title" id="t-sec-head">כיסוי ראש – מה חשוב לי</div>
+            <div id="card-head" class="sec-body"></div>
+          </div>
+
+          <div class="sec">
+            <div class="sec-title" id="t-sec-inquiries">מספרים לבירורים</div>
+            <div id="card-inquiries" class="sec-body"></div>
+          </div>
+
+          <div class="sec">
+            <div class="sec-title" id="t-sec-matches">שידוכים</div>
+
+            <div class="match-add">
+              <select id="match-partner"></select>
+              <button class="btn primary" id="btn-add-match">+ יצירת שידוך</button>
+            </div>
+
+            <div id="matches" class="matches"></div>
+          </div>
+
+          <div class="sec">
+            <div class="sec-title" id="t-sec-ai">יועץ AI לשדכן</div>
+            <div class="sec-body">
+              <textarea id="ai-q" placeholder="כתבי כאן… לדוגמה: ניסוח עדין / מה לשאול / הערכת התאמה"></textarea>
+              <div class="ai-actions">
+                <button class="btn primary" id="btn-ai">שליחה</button>
+                <div class="ai-hint" id="t-ai-hint">Enter שולח · Shift+Enter שורה חדשה</div>
+              </div>
+              <div id="ai-a" class="ai-answer"></div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="card-footer">
+          <button class="btn primary" id="btn-share">🔗 שיתוף פרופיל</button>
+          <button class="btn" id="btn-back">⬅ חזרה</button>
+          <button class="btn" id="btn-edit">✏️ עריכה</button>
+          
+         
+
+          <!-- פעולות רגילות (כשלא בפח) -->
+          <button class="btn danger" id="btn-trash">🗑️ לפח מחזור</button>
+          <button class="btn" id="btn-archive">📦 ארכיון</button>
+
+          <!-- מופיע רק כשבפח -->
+          <button class="btn" id="btn-restore" style="display:none;">♻️ שחזור מהפח</button>
+          <button class="btn danger" id="btn-delete">❌ מחיקה לצמיתות</button>
+        </div>
+
+        <div class="hint" id="t-footer-hint">
+          הערות למחשבה בלבד. השדכן מכיר את התמונה המלאה.
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Bottom bar -->
+  <nav class="bottombar">
+    <button class="tab active" id="tab-all" type="button">🏠<span id="t-tab-home">בית</span></button>
+    <button class="tab" id="tab-important" type="button">⭐<span id="t-tab-important">חשובים</span></button>
+    <button class="tab" id="tab-archived" type="button">🗂️<span id="t-tab-archived">ארכיון</span></button>
+    <button class="tab" id="tab-trash" type="button">🗑️<span id="t-tab-trash">פח</span></button>
+    <button class="tab" id="tab-settings" type="button">⚙️<span id="t-tab-settings">הגדרות</span></button>
+  </nav>
+
+  <!-- Candidate modal -->
+  <div id="modal" class="modal" style="display:none;">
+    <div class="modal-box">
+      <div class="modal-title" id="modal-title">הוספת מועמד</div>
+
+      <div class="grid">
+        <label><span id="t-f-name">שם מלא</span>
+          <input id="f-name" />
+        </label>
+
+        <label><span id="t-f-age">גיל</span>
+          <input id="f-age" type="number" min="18" />
+        </label>
+
+        <label><span id="t-f-area">אזור</span>
+          <input id="f-area" />
+        </label>
+
+        <label><span id="t-f-level">רמה דתית</span>
+          <input id="f-level" />
+        </label>
+
+        <label><span id="t-f-ethnicity">עדה</span>
+          <input id="f-ethnicity" placeholder="לדוגמה: מרוקאי/אשכנזי/תימני…" />
+        </label>
+
+        <label><span id="t-f-phone">מספר טלפון</span>
+          <input id="f-phone" inputmode="tel" placeholder="05..." />
+        </label>
+
+        <label><span id="t-f-inquiries">מספרים לבירורים</span>
+          <textarea id="f-inquiries" placeholder="שם + טלפון + קשר (אח/גיס/רב/מנהל...)"></textarea>
+        </label>
+
+        <label><span id="t-f-photo">תמונה (אופציונלי)</span>
+          <input id="f-photo" type="file" accept="image/*" />
+        </label>
+
+        <label><span id="t-f-doing">מה עושה כרגע</span>
+          <textarea id="f-doing"></textarea>
+        </label>
+
+        <label><span id="t-f-personality">אופי ותכונות</span>
+          <textarea id="f-personality"></textarea>
+        </label>
+
+        <label><span id="t-f-family">משפחה</span>
+          <textarea id="f-family"></textarea>
+        </label>
+
+        <label><span id="t-f-looking">מי מחפש/ת</span>
+          <textarea id="f-looking"></textarea>
+        </label>
+
+        <label><span id="t-f-head">כיסוי ראש – מה חשוב לי</span>
+          <textarea id="f-head"></textarea>
+        </label>
+      </div>
+
+      <div class="modal-actions">
+        <button class="btn" id="btn-cancel">ביטול</button>
+        <button class="btn primary" id="btn-save">שמירה</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Settings modal -->
+  <div id="settings-modal" class="modal" style="display:none;">
+    <div class="modal-box">
+      <div class="modal-title" id="t-settings-title">הגדרות</div>
+
+      <div class="grid">
+        <label class="row">
+          <span id="t-s-lang">שפה</span>
+          <select id="s-lang">
+            <option value="he">עברית</option>
+            <option value="en">English</option>
+          </select>
+        </label>
+
+        <label class="row">
+          <span id="t-s-dark">מצב כהה</span>
+          <input id="s-dark" type="checkbox" />
+        </label>
+
+        <label class="row">
+          <span id="t-s-blur">טשטוש תמונות ברשימה</span>
+          <input id="s-blur" type="checkbox" />
+        </label>
+
+        <label class="row">
+          <span id="t-s-shabbat">מצב שבת / שקט (צפייה בלבד)</span>
+          <input id="s-shabbat" type="checkbox" />
+        </label>
+
+        <label class="row">
+          <span id="t-s-pin-enabled">נעילת PIN בפתיחה</span>
+          <input id="s-pin-enabled" type="checkbox" />
+        </label>
+
+        <label><span id="t-s-pin">הגדרת/שינוי PIN (4 ספרות)</span>
+          <input id="s-pin" inputmode="numeric" maxlength="4" placeholder="1234" />
+        </label>
+
+        <label class="row">
+          <span id="t-s-pin-delete">לדרוש PIN למחיקה לצמיתות</span>
+          <input id="s-pin-delete" type="checkbox" />
+        </label>
+
+        <label class="row">
+          <span id="t-s-trash-days">פח מחזור – ימים</span>
+          <input id="s-trash-days" type="number" min="1" max="365" />
+        </label>
+
+        <div class="sec mini">
+          <div class="sec-title" id="t-backup">גיבוי</div>
+          <div class="sec-body">
+            <button class="btn" id="btn-export">הורדת גיבוי</button>
+            <div style="height:8px"></div>
+            <input id="import-file" type="file" accept="application/json" />
+            <div style="height:8px"></div>
+            <button class="btn danger" id="btn-import">ייבוא גיבוי</button>
+            <div class="hint" id="t-import-hint">ייבוא ידרוס את הנתונים הקיימים.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-actions">
+        <button class="btn" id="btn-settings-close">סגירה</button>
+        <button class="btn primary" id="btn-settings-save">שמירה</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Lock overlay -->
+  <div id="lock" class="lock" style="display:none;">
+    <div class="lock-box">
+      <div class="lock-title" id="t-lock-title">נעילה</div>
+      <div class="lock-sub" id="t-lock-sub">הכניסי PIN כדי להמשיך</div>
+      <input id="lock-pin" inputmode="numeric" maxlength="4" placeholder="PIN" />
+      <button class="btn primary" id="btn-unlock" style="margin-top:10px;">פתיחה</button>
+      <div id="lock-err" class="lock-err"></div>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <script src="./script.js"></script>
+</body>
+</html>
