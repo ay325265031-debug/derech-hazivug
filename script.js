@@ -1343,6 +1343,67 @@ function bind() {
         prompt("העתיקי את הקישור:", url);
       }
     };
+     // Share modal
+  function openShareModal() {
+    const c = getSelected();
+    if (!c) return;
+
+    const url = window.location.href; // כרגע זה הקישור של האפליקציה
+    const title = `פרופיל: ${c.name || ""}`.trim();
+    const text = `${title}\n${c.age || ""} · ${c.area || ""} · ${c.level || ""}\n${url}`;
+
+    const wa = document.getElementById("share-wa");
+    const mail = document.getElementById("share-mail");
+    const hint = document.getElementById("share-hint");
+
+    if (wa) wa.href = `https://wa.me/?text=${encodeURIComponent(text)}`;
+    if (mail) mail.href = `mailto:?subject=${encodeURIComponent(title)}&body=${encodeURIComponent(text)}`;
+
+    if (hint) hint.style.display = "none";
+
+    const sm = document.getElementById("share-modal");
+    if (sm) sm.style.display = "flex";
+  }
+
+  function closeShareModal() {
+    const sm = document.getElementById("share-modal");
+    if (sm) sm.style.display = "none";
+  }
+
+  const shareBtn = document.getElementById("btn-share");
+  if (shareBtn) shareBtn.onclick = openShareModal;
+
+  const shareClose = document.getElementById("share-close");
+  if (shareClose) shareClose.onclick = closeShareModal;
+
+  const shareCopy = document.getElementById("share-copy");
+  if (shareCopy) {
+    shareCopy.onclick = async () => {
+      const c = getSelected();
+      if (!c) return;
+      const url = window.location.href;
+      const title = `פרופיל: ${c.name || ""}`.trim();
+      const text = `${title}\n${c.age || ""} · ${c.area || ""} · ${c.level || ""}\n${url}`;
+      try {
+        await navigator.clipboard.writeText(text);
+        const hint = document.getElementById("share-hint");
+        if (hint) {
+          hint.textContent = "הועתק ✅";
+          hint.style.display = "block";
+        }
+      } catch (e) {
+        alert("לא הצלחתי להעתיק. נסי להעתיק ידנית.");
+      }
+    };
+  }
+
+  // close on backdrop click
+  const shareModal = document.getElementById("share-modal");
+  if (shareModal) {
+    shareModal.addEventListener("click", (e) => {
+      if (e.target.id === "share-modal") closeShareModal();
+    });
+  }
   }
 
     // יוצרים דף שיתוף חדש
