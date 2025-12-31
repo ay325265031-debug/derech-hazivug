@@ -406,7 +406,7 @@ body.dark .btn{ background: rgba(15,23,42,0.55); }
   backdrop-filter: blur(6px);
 }
 .modal-box{
-  width:min(920px, 100%);
+  width: min(920px, calc(100vw - 24px));
   max-height: 85vh;
   overflow:auto;
   background: var(--cardSolid);
