@@ -46,7 +46,7 @@ const I18N = {
     brand: "דרך הזיווג",
     filters: { all:"כולם", important:"⭐ חשובים", archived:"ארכיון", trash:"🗑️ פח מחזור" },
     tabs: { home:"בית", important:"חשובים", archived:"ארכיון", trash:"פח", settings:"הגדרות" },
-    sec: { doing:"מה עושה כרגע", personality:"אופי ותכונות", family:"משפחה", looking:"מי מחפש/ת", head:"כיסוי ראש – מה חשוב לי", matches:"שידוכים", ai:"יועץ AI לשדכן" },
+    sec: { doing:"מה עושה כרגע", personality:"אופי ותכונות", family:"משפחה", looking:"מה מחפש/ת", head:"כיסוי ראש – מה חשוב לי", matches:"שידוכים", ai:"יועץ AI לשדכן" },
     aiHint: "Enter שולח · Shift+Enter שורה חדשה",
     footerHint: "הערות למחשבה בלבד. השדכן מכיר את התמונה המלאה.",
     placeholders: { search:"חיפוש לפי שם…", ai:"כתבי כאן… לדוגמה: ניסוח עדין / מה לשאול / הערכת התאמה" },
@@ -1456,7 +1456,7 @@ function bind() {
             <div class="section"><span class="label">מה עושה כרגע:</span> ${candidate.doing || ''}</div>
             <div class="section"><span class="label">אופי ותכונות:</span> ${candidate.personality || ''}</div>
             <div class="section"><span class="label">משפחה:</span> ${candidate.family || ''}</div>
-            <div class="section"><span class="label">מי מחפש/ת:</span> ${candidate.looking || ''}</div>
+            <div class="section"><span class="label">מה מחפש/ת:</span> ${candidate.looking || ''}</div>
             <div class="section"><span class="label">כיסוי ראש:</span> ${candidate.head || ''}</div>
             <hr style="margin:20px 0;">
             <p style="text-align:center;color:#777">נוצר באפליקציית “דרך הזיווג”</p>
@@ -1523,7 +1523,7 @@ function bind() {
     <div class="section"><span class="label">מה עושה כרגע:</span> ${candidate.doing}</div>
     <div class="section"><span class="label">אופי ותכונות:</span> ${candidate.personality}</div>
     <div class="section"><span class="label">משפחה:</span> ${candidate.family}</div>
-    <div class="section"><span class="label">מי מחפש/ת:</span> ${candidate.looking}</div>
+    <div class="section"><span class="label">מה מחפש/ת:</span> ${candidate.looking}</div>
     <div class="section"><span class="label">כיסוי ראש:</span> ${candidate.head}</div>
     <footer>
     <button onclick="shareProfile()">שתף בפרופיל 📤</button>
@@ -1715,7 +1715,7 @@ ${c.personality || "-"}
 משפחה:
 ${c.family || "-"}
 
-מי מחפש/ת:
+מה מחפש/ת:
 ${c.lookingFor || "-"}
 
 כיסוי ראש:
@@ -1871,7 +1871,7 @@ h1{
     <div class="sec"><b>מה עושה כרגע</b>${c.doing || ""}</div>
     <div class="sec"><b>אופי ותכונות</b>${c.personality || ""}</div>
     <div class="sec"><b>משפחה</b>${c.family || ""}</div>
-    <div class="sec"><b>מי מחפש/ת</b>${c.looking || ""}</div>
+    <div class="sec"><b>מה מחפש/ת</b>${c.looking || ""}</div>
   </div>
 </div>
 
