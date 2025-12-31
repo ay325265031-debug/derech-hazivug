@@ -327,5 +327,27 @@
     </div>
   </div>
   <script src="./script.js"></script>
+  <!-- Share modal -->
+<div id="share-modal" class="modal" style="display:none;">
+  <div class="modal-box" style="max-width:520px;">
+    <div class="modal-title">שיתוף פרופיל</div>
+
+    <div class="sec-body" id="share-text" style="margin-bottom:10px;">
+      בחרי איך לשתף:
+    </div>
+
+    <div style="display:flex; gap:10px; flex-wrap:wrap;">
+      <a class="btn primary" id="share-wa" target="_blank" rel="noopener">וואטסאפ</a>
+      <a class="btn" id="share-mail">מייל</a>
+      <button class="btn" id="share-copy" type="button">העתקת קישור</button>
+    </div>
+
+    <div class="hint" id="share-hint" style="margin-top:12px; display:none;"></div>
+
+    <div class="modal-actions" style="justify-content:flex-end;">
+      <button class="btn" id="share-close" type="button">סגירה</button>
+    </div>
+  </div>
+</div>
 </body>
 </html>
