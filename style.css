@@ -695,3 +695,13 @@ body.dark .lock-box{ background: #0f172a; }
   color:#111827;
   font-size: 13px;
 }
+/* הסתרת סרגל תחתון במובייל */
+@media (max-width: 768px) {
+  .bottombar {
+    display: none !important;
+  }
+
+  .container {
+    padding-bottom: 20px;
+  }
+}
