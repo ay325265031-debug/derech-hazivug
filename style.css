@@ -718,3 +718,53 @@ body.dark .lock-box{ background: #0f172a; }
   gap:10px;
   margin-top:12px;
 }
+/* ===== Mobile Fix (iPhone) ===== */
+html, body{
+  width:100%;
+  overflow-x:hidden;
+}
+
+img{ max-width:100%; height:auto; }
+
+/* safe area (אייפון עם "נוטץ") */
+.topbar{
+  padding-top: env(safe-area-inset-top);
+}
+
+.bottombar{
+  padding-bottom: calc(10px + env(safe-area-inset-bottom));
+}
+
+/* שיפור גדלים במובייל */
+@media (max-width: 520px){
+  .container{ padding: 12px; padding-bottom: 92px; }
+
+  .card{ padding: 12px; }
+  .card-title{ font-size: 20px; }
+  .card-cover{ height: 70px; }
+
+  .list{ grid-template-columns: 1fr; }
+
+  .item{ padding: 10px; }
+  .avatar{ width: 46px; height: 46px; }
+
+  .btn{ font-size: 15px; padding: 11px 12px; }
+
+  /* מודאל/הגדרות שלא יחרוג מהמסך */
+  .modal{
+    padding:
+      calc(12px + env(safe-area-inset-top))
+      12px
+      calc(12px + env(safe-area-inset-bottom));
+    align-items: center;
+  }
+  .modal-box{
+    width: 100%;
+    max-height: 85vh;
+    border-radius: 18px;
+    padding: 12px;
+  }
+
+  /* אם יש לך טקסטים ארוכים/כפתורים שנדחפים */
+  .topbar-inner{ padding: 10px 12px; }
+}
