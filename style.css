@@ -417,6 +417,20 @@ body.dark .btn{ background: rgba(15,23,42,0.55); }
   color: var(--text);
 }
 body.dark .modal-box{ background: #0f172a; }
+/* Mobile fix: make modal fit iPhone nicely */
+@media (max-width: 520px){
+  .modal{
+    padding: 10px;
+    align-items: flex-start;
+  }
+  .modal-box{
+    width: 100%;
+    max-height: calc(100vh - 20px);
+    height: auto;
+    border-radius: 18px;
+    padding: 14px;
+  }
+}
 
 .modal-title{ font-size:18px; font-weight:900; margin-bottom:10px; }
 
