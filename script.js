@@ -2001,3 +2001,28 @@ async function askAI() {
     $("ai-answer").innerText = "שגיאה בחיבור ל-AI";
   }
 }
+async function askAI() {
+  const q = document.getElementById("ai-q").value.trim();
+  const a = document.getElementById("ai-a");
+  const c = window.currentCandidateForAI;
+
+  if (!q || !c) return;
+
+  a.textContent = "חושב…";
+
+  try {
+    const res = await fetch("/api/chat", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        question: q,
+        candidate: c
+      })
+    });
+
+    const data = await res.json();
+    a.textContent = data.answer || "לא התקבלה תשובה";
+  } catch (e) {
+    a.textContent = "שגיאה בחיבור ל-AI";
+  }
+}
