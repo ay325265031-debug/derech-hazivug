@@ -584,6 +584,7 @@ function deleteSelectedPermanent() {
 function renderCard() {
   const c = getSelected();
   if (!c) return;
+   window.currentCandidateForAI = c;
 
   $("card-name").textContent = c.name || "";
   $("card-age").textContent = c.age || "";
