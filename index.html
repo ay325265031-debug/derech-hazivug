@@ -151,17 +151,21 @@
 
         </div>
 
-        <div class="sec">
-            <div class="sec-title" id="t-sec-ai">יועץ AI לשדכן</div>
-            <div class="sec-body">
-              <textarea id="ai-q" placeholder="כתבי כאן… לדוגמה: ניסוח עדין / מה לשאול / הערכת התאמה"></textarea>
-              <div class="ai-actions">
-                <button class="btn primary" id="btn-ai">שליחה</button>
-                <div class="ai-hint" id="t-ai-hint">Enter שולח · Shift+Enter שורה חדשה</div>
-              </div>
-              <div id="ai-a" class="ai-answer"></div>
-            </div>
-          </div>
+        <div class="ai-box">
+  <div class="ai-title">🤖 יועץ AI לשדכן</div>
+
+  <textarea
+    id="ai-q"
+    placeholder="שאלי על המועמד: התאמה, רגישויות, ניסוח לשדכן, ניתוח..."
+  ></textarea>
+
+  <div class="ai-actions">
+    <button class="btn primary" id="btn-ai">שליחה</button>
+    <span class="ai-hint">Enter לשליחה · Shift+Enter לשורה חדשה</span>
+  </div>
+
+  <div id="ai-a" class="ai-answer"></div>
+</div>
         <div class="card-footer">
           <button class="btn primary" id="btn-share">🔗 שיתוף פרופיל</button>
           <button class="btn" id="btn-back">⬅ חזרה</button>
