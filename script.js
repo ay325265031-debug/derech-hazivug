@@ -1975,3 +1975,28 @@ h1{
   w.document.write(html);
   w.document.close();
 }
+async function askAI() {
+  const question = $("ai-question").value.trim();
+  if (!question) return;
+
+  const c = getSelected();
+  if (!c) return;
+
+  $("ai-answer").innerText = "חושב...";
+
+  try {
+    const res = await fetch("/api/chat", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        question,
+        candidate: c
+      })
+    });
+
+    const data = await res.json();
+    $("ai-answer").innerText = data.answer || "לא התקבלה תשובה";
+  } catch (e) {
+    $("ai-answer").innerText = "שגיאה בחיבור ל-AI";
+  }
+}
