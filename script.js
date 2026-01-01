@@ -626,6 +626,9 @@ function renderCard() {
   if (btnExportPdf) {
     btnExportPdf.onclick = () => {
       alert("ייצוא ל-PDF מחובר 🎉");
+       // reset AI box when switching candidate
+$("ai-question").value = "";
+$("ai-answer").innerText = "";
     };
   }
 
