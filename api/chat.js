@@ -12,19 +12,15 @@ export default async function handler(req, res) {
   try {
     const { messages } = req.body;
 
-    if (!messages || !Array.isArray(messages)) {
-      return res.status(400).json({ error: "Missing messages array" });
-    }
-
-    const completion = await openai.chat.completions.create({
+    const response = await openai.chat.completions.create({
       model: "gpt-4o-mini",
       messages,
-      temperature: 0.7,
+      temperature: 0.6,
     });
 
-    const reply = completion.choices[0].message.content;
-
-    res.status(200).json({ reply });
+    res.status(200).json({
+      reply: response.choices[0].message.content,
+    });
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: "AI error" });
