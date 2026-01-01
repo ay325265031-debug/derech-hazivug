@@ -2078,3 +2078,34 @@ document.addEventListener("click", (e) => {
     askAI();
   }
 });
+const btnAI = document.getElementById("btn-ai");
+
+if (btnAI) {
+  btnAI.addEventListener("click", async () => {
+    const q = document.getElementById("ai-q").value.trim();
+    const out = document.getElementById("ai-a");
+
+    if (!q) {
+      out.textContent = "נא לכתוב שאלה";
+      return;
+    }
+
+    out.textContent = "חושב…";
+
+    try {
+      const res = await fetch("/api/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          question: q,
+          candidate: getSelected()
+        })
+      });
+
+      const data = await res.json();
+      out.textContent = data.answer || "לא התקבלה תשובה";
+    } catch (e) {
+      out.textContent = "שגיאה בחיבור ל-AI";
+    }
+  });
+}
