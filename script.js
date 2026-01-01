@@ -1297,7 +1297,91 @@ function bind() {
   }
   function closeShareModal(){
     if (shareModal) shareModal.style.display = "none";
+     // AI Chat bind
+  const aiSend = document.getElementById("ai-send");
+  const aiInput = document.getElementById("ai-input");
+  if (aiSend && aiInput) {
+    aiSend.onclick = () => aiAsk();
+    aiInput.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") aiAsk();
+    });
   }
+  }
+     function showAIBoxIfNeeded() {
+  const box = document.getElementById("ai-box");
+  if (!box) return;
+
+  // פה את שולטת אם זה רק לשדכן:
+  // אם יש לך "מצב שדכן" / סיסמה / לוגין – פה עושים IF.
+  // כרגע פשוט מציגים תמיד בתוך הכרטיס:
+  box.style.display = "block";
+}
+
+function addMsg(text, who) {
+  const wrap = document.getElementById("ai-messages");
+  if (!wrap) return;
+
+  const div = document.createElement("div");
+  div.className = "ai-msg " + (who === "user" ? "ai-user" : "ai-assistant");
+  div.textContent = text;
+  wrap.appendChild(div);
+  wrap.scrollTop = wrap.scrollHeight;
+}
+
+async function aiAsk() {
+  const input = document.getElementById("ai-input");
+  if (!input) return;
+
+  const q = (input.value || "").trim();
+  if (!q) return;
+
+  input.value = "";
+  addMsg(q, "user");
+  addMsg("רגע…", "assistant");
+
+  // מוחקים את ה"רגע…" האחרון כשמגיעה תשובה
+  const wrap = document.getElementById("ai-messages");
+  const last = wrap?.lastElementChild;
+
+  // חשוב: לקחת את המועמד הנבחר אצלך
+  // אם יש לך פונקציה getSelected() כמו שראיתי – נשתמש בה:
+  let candidate = null;
+  try { candidate = getSelected?.(); } catch(e) {}
+
+  // שולחים רק שדות “מותרים”
+  const safeCandidate = candidate ? {
+    name: candidate.name,
+    age: candidate.age,
+    area: candidate.area,
+    level: candidate.level,
+    doing: candidate.doing,
+    personality: candidate.personality,
+    family: candidate.family,
+    looking: candidate.looking,
+    head: candidate.head
+  } : null;
+
+  try {
+    const res = await fetch("/api/chat", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        question: q,
+        candidate: safeCandidate
+      })
+    });
+
+    const data = await res.json();
+    if (!res.ok) throw new Error(data?.error || "Request failed");
+
+    if (last && last.textContent === "רגע…") last.remove();
+    addMsg(data.answer || "לא התקבלה תשובה.", "assistant");
+  } catch (err) {
+    if (last && last.textContent === "רגע…") last.remove();
+    addMsg("יש תקלה בחיבור ל-AI. תנסי שוב בעוד רגע.", "assistant");
+    console.log(err);
+  }
+}
 
   // כפתור "שיתוף פרופיל" (אם קיים אצלך בכרטיס)
   const btnShare = $("btn-share");
