@@ -66,46 +66,8 @@
           </div>
 
           <button class="btn ghost" id="btn-star">☆ סימון חשוב</button>
-          <!-- AI Matcher -->
-<div id="ai-box" style="margin-top:16px;">
-  <div style="font-weight:600; margin-bottom:6px;">
-    🤖 עוזר שידוכים חכם
-  </div>
+          
 
-  <textarea
-    id="ai-question"
-    placeholder="שאלי על המועמד, התאמה, המשך תהליך..."
-    style="width:100%; min-height:60px; border-radius:10px; padding:8px;"
-  ></textarea>
-
-  <button
-    onclick="askAI()"
-    style="margin-top:8px; padding:8px 12px; border-radius:10px;"
-  >
-    שאלי את ה-AI
-  </button>
-
-  <div
-    id="ai-answer"
-    style="margin-top:10px; font-size:14px; line-height:1.5;"
-  ></div>
-</div>
-        </div>
-
-        <div class="hint" id="soft-note"></div>
-<!-- AI Chat (רק לשדכן) -->
-<div class="ai-box" id="ai-box" style="display:none;">
-  <div class="ai-title">שאלי את ה-AI על המועמד/ת</div>
-
-  <div class="ai-messages" id="ai-messages"></div>
-
-  <div class="ai-input-row">
-    <input id="ai-input" type="text" placeholder="כתבי שאלה… (לדוג׳: מה הכי חשוב לשאול בשיחה הראשונה?)" />
-    <button class="btn primary" id="ai-send">שליחה</button>
-  </div>
-
-  <div class="ai-hint">המידע כאן לשדכן בלבד. לא נשלחים פרטים אישיים שלא בחרת לשתף.</div>
-</div>
         <div class="sections">
 
           <div class="sec">
@@ -166,19 +128,7 @@
 
   <div id="ai-a" class="ai-answer"></div>
 </div>
-        <div class="sec" id="ai-sec">
-  <div class="sec-title" id="t-sec-ai">יועץ AI לשדכן 🤖</div>
-  <div class="sec-body">
-    <textarea id="ai-q" placeholder="שאל/י על המועמד/ת..."></textarea>
-
-    <div class="ai-actions">
-      <button class="btn primary" id="btn-ai">שאלי את ה-AI</button>
-      <div class="ai-hint" id="t-ai-hint">Enter לשליחה · Shift+Enter לשורה חדשה</div>
-    </div>
-
-    <div id="ai-a" class="ai-answer"></div>
-  </div>
-</div>
+      
         <div class="card-footer">
           <button class="btn primary" id="btn-share">🔗 שיתוף פרופיל</button>
           <button class="btn" id="btn-back">⬅ חזרה</button>
