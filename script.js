@@ -2026,3 +2026,55 @@ async function askAI() {
     a.textContent = "שגיאה בחיבור ל-AI";
   }
 }
+async function askAI() {
+  const qEl = document.getElementById("ai-q");
+  const aEl = document.getElementById("ai-a");
+
+  if (!qEl || !aEl) return;
+
+  const question = qEl.value.trim();
+  if (!question) {
+    aEl.textContent = "נא לכתוב שאלה 🙏";
+    return;
+  }
+
+  aEl.textContent = "ה-AI חושב… 🤖";
+
+  const c = getSelected();
+  if (!c) {
+    aEl.textContent = "לא נבחר מועמד";
+    return;
+  }
+
+  const context = `
+שם: ${c.name}
+גיל: ${c.age}
+אזור: ${c.area}
+רמה דתית: ${c.level}
+עיסוק: ${c.doing}
+אופי: ${c.personality}
+משפחה: ${c.family}
+מחפש/ת: ${c.lookingFor}
+  `;
+
+  try {
+    const res = await fetch("/api/chat", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        question,
+        context
+      })
+    });
+
+    const data = await res.json();
+    aEl.textContent = data.answer || "לא התקבלה תשובה";
+  } catch (e) {
+    aEl.textContent = "שגיאה בחיבור ל-AI";
+  }
+}
+document.addEventListener("click", (e) => {
+  if (e.target && e.target.id === "btn-ai") {
+    askAI();
+  }
+});
